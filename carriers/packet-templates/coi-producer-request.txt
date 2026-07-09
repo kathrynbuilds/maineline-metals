@@ -1,0 +1,21 @@
+Subject: Certificate request — {{carrierName}} (DOT {{dotNumber}}) — Genesis Logistics Group as certificate holder
+
+Hello,
+
+Genesis Logistics Group, LLC (MC-48921257 / USDOT 7336402) is onboarding
+your insured, {{carrierName}} (DOT {{dotNumber}}), as a motor carrier.
+
+Could you please issue a certificate of insurance directly to us showing:
+  - Auto liability and cargo limits currently in force
+  - Genesis Logistics Group, LLC as certificate holder
+  - IMPORTANT: please confirm in writing whether the cargo policy contains
+    any exclusion for METAL COILS. We haul steel coils and cannot dispatch
+    without written confirmation that coils are covered.
+
+Per our fraud-prevention SOP we only accept certificates sent directly from
+the producer — thank you for sending it from your office rather than through
+the carrier.
+
+Thank you,
+Kathryn
+Genesis Logistics Group, LLC

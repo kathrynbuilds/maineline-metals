@@ -1,0 +1,19 @@
+Subject: Broker-Carrier Agreement for signature — {{carrierName}} / Genesis Logistics
+
+Hi {{contactName}},
+
+Attached is the Genesis Logistics Group Broker-Carrier Agreement for
+{{carrierName}} (MC {{mcNumber}}, DOT {{dotNumber}}).
+
+Highlights, so there are no surprises:
+  - Standard terms, {{paymentTerms}} payment; quick pay available on request.
+  - Coil loads require racks/cradles and the securement listed on each rate
+    confirmation.
+  - Double brokering is prohibited and voids the agreement.
+
+Please sign and return all pages. Once the BCA, W-9, and insurance
+certificate are on file you're cleared for dispatch on our steel lanes.
+
+Thanks,
+Kathryn
+Genesis Logistics Group, LLC — MC-48921257 / USDOT 7336402

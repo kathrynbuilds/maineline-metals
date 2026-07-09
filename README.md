@@ -68,6 +68,33 @@ npm run verify-carriers -- --force       # ignore the 30-day freshness skip
 - Results are cached in `.cache/authority.json`; anything verified within
   30 days is skipped unless `--force`. Supports `--dry-run` and `--limit N`.
 
+## Phase 3 — TMS, dispatch gate, carrier packets
+
+Minimal load tracking + the rate confirmation generator with the hard
+dispatch gate in front of it:
+
+```
+node tms/loads.js create --origin "Blytheville, AR" --destination "Atlanta, GA" \
+  --commodity "Steel coils" --weight 47500 --rate 1850 --carrier-dot 1234567 \
+  --pickup 2026-07-14
+node tms/rate-confirmation.js L-0001    # fetches the carrier live from Airtable
+node carriers/packet-assembler.js 1234567
+npm run dashboard                        # http://localhost:8642
+```
+
+- **Dispatch gate** (`carriers/dispatch-gate.js`): rate-con generation
+  hard-fails unless Status is Packet Complete/Active, Coil Exclusion Status
+  is "Confirmed No Exclusion", W-9 + COI + signed BCA are on file, and the
+  FMCSA authority verification is ≤ 30 days old. Every failure is listed
+  with its own message; an OOS flag or non-Active authority also blocks.
+- **Packet assembler** drafts whichever of the three packet emails are still
+  missing — W-9 request, BCA cover, and the COI request addressed to the
+  **insurance producer** (never the carrier, per the fraud SOP) — into the
+  approval queue: an Airtable Activity with Email Status = Draft plus a file
+  in `outbox/`. Nothing is ever sent by the system.
+- Loads live in `data/loads.json` (git-ignored) with a forward-only
+  lifecycle: Booked → Dispatched → In Transit → Delivered → Invoiced → Paid.
+
 ## Invariants (see CLAUDE.md for the full list)
 
 1. No dispatch without verification — the rate-con generator hard-fails on

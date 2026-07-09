@@ -1,0 +1,15 @@
+Subject: W-9 needed to set you up — {{carrierName}} / Genesis Logistics
+
+Hi {{contactName}},
+
+Great to be getting you set up with Genesis Logistics Group (MC-48921257,
+USDOT 7336402). To finish your carrier packet we need a current W-9 for
+{{carrierName}} (DOT {{dotNumber}}).
+
+A signed PDF reply to this email works fine. Once we have the W-9, signed
+Broker-Carrier Agreement, and your insurance certificate on file, we can
+start dispatching you on our Blytheville, AR ↔ Atlanta, GA steel lanes.
+
+Thanks,
+Kathryn
+Genesis Logistics Group, LLC
