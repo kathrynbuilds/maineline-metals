@@ -52,7 +52,7 @@ export function createAirtableClient({
     return records;
   }
 
-  async function writeBatched(tableId, method, records) {
+  async function writeBatched(tableId, method, records, { typecast = false } = {}) {
     const results = [];
     for (let i = 0; i < records.length; i += BATCH_SIZE) {
       const batch = records.slice(i, i + BATCH_SIZE);
@@ -64,17 +64,18 @@ export function createAirtableClient({
       const body = await http.requestJson(`${API_ROOT}/${baseId}/${tableId}`, {
         method,
         headers,
-        body: JSON.stringify({ records: batch, typecast: false }),
+        body: JSON.stringify({ records: batch, typecast }),
       });
       results.push(...(body.records ?? []));
     }
     return results;
   }
 
-  // records: [{ fields: { <fieldId>: value } }]
-  const createRecords = (tableId, records) => writeBatched(tableId, 'POST', records);
+  // records: [{ fields: { <fieldId>: value } }]. opts.typecast lets intake map
+  // free-form select values (e.g. tarp sizes) to choices; default strict.
+  const createRecords = (tableId, records, opts) => writeBatched(tableId, 'POST', records, opts);
   // records: [{ id, fields }] — PATCH only touches the listed fields
-  const updateRecords = (tableId, records) => writeBatched(tableId, 'PATCH', records);
+  const updateRecords = (tableId, records, opts) => writeBatched(tableId, 'PATCH', records, opts);
 
   /** Meta API: full table/field schema for the base (read-only). */
   async function getBaseSchema() {

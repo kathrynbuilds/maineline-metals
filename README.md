@@ -95,6 +95,39 @@ npm run dashboard                        # http://localhost:8642
 - Loads live in `data/loads.json` (git-ignored) with a forward-only
   lifecycle: Booked → Dispatched → In Transit → Delivered → Invoiced → Paid.
 
+## Phase 4 — Carrier email intake loop
+
+Inbound replies land as raw `.eml` files in `inbox-drop/` via either adapter
+(pick one):
+
+```
+node carriers/email-intake/imap-poller.js       # polls IMAP_* inbox for UNSEEN mail
+node carriers/email-intake/webhook-receiver.js  # or: inbound-parse webhook on :8643
+                                                # (requires INTAKE_WEBHOOK_TOKEN)
+npm run intake                                  # classify + extract + update CRM
+npm run followups                               # run daily: cadence engine
+```
+
+- `npm run intake` matches each message to a carrier (sender email, then a
+  DOT/MC number in the body — unmatched mail is quarantined in
+  `inbox-drop/unmatched/`, never guessed), then calls the Claude API
+  (`ANTHROPIC_API_KEY`, model `claude-sonnet-5`) to classify the reply
+  (interested / declined / questions / out-of-office / other) and extract
+  intake answers: trailer types, coil racks, tarps, securement, 48K
+  capability, cargo limit, new-MC acceptance, payment preference, factoring
+  company, rate range, core lanes, trucks/week.
+- CRM effects: blank fields filled only (conflicts to Notes), Contacted →
+  Responded on a real reply (out-of-office doesn't count), an Activity per
+  message with the raw email body, a "Confirm coil exclusion with producer"
+  task for any Responded+ carrier still at Not Verified, and an urgent
+  fraud-review task when the stated factoring company conflicts with the
+  value on file.
+- `npm run followups`: day-3 and day-8 bump drafts for silent Contacted
+  carriers, Status = Declined after 15 days of silence (noted in Notes), and
+  a day-2 packet reminder for responders with missing W-9/COI/BCA. Every
+  email is a draft in `outbox/` + Airtable (Email Status = Draft) — nothing
+  ever auto-sends.
+
 ## Invariants (see CLAUDE.md for the full list)
 
 1. No dispatch without verification — the rate-con generator hard-fails on

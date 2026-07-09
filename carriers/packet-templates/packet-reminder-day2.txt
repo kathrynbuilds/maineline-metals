@@ -1,0 +1,14 @@
+Subject: Almost set up — just missing {{missingItems}} — {{carrierName}}
+
+Hi {{contactName}},
+
+Thanks again for getting back to us — you're almost fully set up with
+Genesis Logistics. We're just missing: {{missingItems}}.
+
+Once that's on file you're cleared for dispatch on the coil lanes we
+discussed. Reply here with anything you have handy and I'll take care of the
+rest.
+
+Thanks,
+Kathryn
+Genesis Logistics Group, LLC — MC-48921257 / USDOT 7336402
