@@ -1,0 +1,5 @@
+usdot_number,legal_business_name,doing_business_as_name,carrier_operation_desc,physical_city,physical_state,phone_number,email,total_power_units,metal_sheets_coils_rolls,last_mcs150_update
+1234567,OZARK STEEL HAULERS LLC,,Interstate,JONESBORO,AR,8705550101,dispatch@ozarksteel.example,12,Y,2026-03-15
+6789012,PRAIRIE WIND CARRIERS,,Interstate,WICHITA,KS,3165550106,,20,Y,2026-04-04
+2345678,PEACH STATE FLATBED INC,PSF CARRIERS,Interstate,MACON,GA,4785550102,ops@psf.example,28,Y,2025-11-02
+5678901,YAZOO HAULING,,Intrastate Non-Hazmat,YAZOO CITY,MS,6625550105,,9,Y,2026-02-10

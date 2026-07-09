@@ -1,0 +1,13 @@
+# Secrets — never commit (AIRTABLE_PAT, FMCSA_WEBKEY, ANTHROPIC_API_KEY, IMAP_*)
+.env
+.env.*
+!.env.example
+
+# Runtime state
+.cache/
+outbox/
+inbox-drop/
+data/
+
+node_modules/
+*.log

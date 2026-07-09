@@ -1,0 +1,18 @@
+{
+  "name": "genesis-tms",
+  "version": "0.1.0",
+  "description": "Genesis Logistics Group TMS + carrier capacity system (zero-dependency Node.js)",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "refresh-census": "node carriers/census-refresh.js",
+    "verify-carriers": "node carriers/verify-authority.js",
+    "intake": "node carriers/email-intake/intake.js",
+    "followups": "node carriers/email-intake/followups.js",
+    "dashboard": "node tms/dashboard.js",
+    "test": "node --test 'test/*.test.js'"
+  }
+}
