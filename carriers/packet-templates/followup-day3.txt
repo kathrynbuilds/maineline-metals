@@ -1,0 +1,18 @@
+Subject: Quick follow-up — steel coil freight out of {{laneHint}} — {{carrierName}}
+
+Hi {{contactName}},
+
+Following up on my note earlier this week. Genesis Logistics Group is lining
+up steady flatbed coil freight ({{laneHint}}) and your fleet looked like a
+strong fit.
+
+If you have coil racks and can run this corridor, just reply with:
+  - trailer types and trucks available per week
+  - coil racks / tarps / securement per truck
+  - your target rate range for the lane
+
+Takes two minutes and gets you first call when loads post.
+
+Thanks,
+Kathryn
+Genesis Logistics Group, LLC — MC-48921257 / USDOT 7336402

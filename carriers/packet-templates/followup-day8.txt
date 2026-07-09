@@ -1,0 +1,14 @@
+Subject: Last check-in — coil freight {{laneHint}} — {{carrierName}}
+
+Hi {{contactName}},
+
+Last note from me — I don't want to clutter your inbox. We're finalizing our
+carrier list for steel coil freight on {{laneHint}} and I'd still love to
+have {{carrierName}} on it.
+
+If it's a fit, a one-line reply works. If not, no hard feelings — I'll close
+the file.
+
+Thanks,
+Kathryn
+Genesis Logistics Group, LLC — MC-48921257 / USDOT 7336402
