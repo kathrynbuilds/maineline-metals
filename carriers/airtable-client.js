@@ -76,7 +76,32 @@ export function createAirtableClient({
   // records: [{ id, fields }] — PATCH only touches the listed fields
   const updateRecords = (tableId, records) => writeBatched(tableId, 'PATCH', records);
 
-  return { listAll, createRecords, updateRecords, writeLog, dryRun, baseId };
+  /** Meta API: full table/field schema for the base (read-only). */
+  async function getBaseSchema() {
+    return http.requestJson(`${API_ROOT}/meta/bases/${baseId}/tables`, { headers });
+  }
+
+  /** Meta API: create a field. Requires a PAT with schema.bases:write. */
+  async function createField(tableId, fieldSpec) {
+    writeLog.push({ tableId, method: 'META_CREATE_FIELD', fieldSpec });
+    if (dryRun) return { id: 'fld_dry_run', ...fieldSpec };
+    return http.requestJson(`${API_ROOT}/meta/bases/${baseId}/tables/${tableId}/fields`, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(fieldSpec),
+    });
+  }
+
+  return {
+    listAll,
+    createRecords,
+    updateRecords,
+    getBaseSchema,
+    createField,
+    writeLog,
+    dryRun,
+    baseId,
+  };
 }
 
 function isBlank(value) {

@@ -43,6 +43,31 @@ npm run refresh-census -- --batch "Blytheville-Atlanta (origin)"
   Both routes auto-detect legacy MCMIS vs MOTUS-era column names and print
   the mapping they chose.
 
+## Phase 2 — Authority verification
+
+Continuous SAFER-grade verification via the FMCSA QCMobile API (get a free
+webkey at https://mobile.fmcsa.dot.gov/QCDevsite/ → `FMCSA_WEBKEY` in `.env`):
+
+```
+npm run verify-carriers -- --provision   # first run only: creates the three
+                                         # authority fields on the Carriers
+                                         # table (PAT needs schema.bases:write)
+npm run verify-carriers                  # daily/weekly run
+npm run verify-carriers -- --force       # ignore the 30-day freshness skip
+```
+
+- Checks every carrier with Status Researched → Active and writes
+  **Authority Status** (Active / Inactive / Not Found / Error),
+  **Authority Verified Date**, and **OOS Flag** (fields are resolved by name
+  at runtime, so it's fine that they were provisioned per-base).
+- Inactive authority or out-of-service → Status = **Do Not Use** with a
+  timestamped explanation in Notes. This is the only automated status change
+  in the whole system, and it only moves carriers down.
+- "Not Found" DOTs are flagged in Notes as a possible fraud signal but left
+  for human review; API errors touch nothing and retry next run.
+- Results are cached in `.cache/authority.json`; anything verified within
+  30 days is skipped unless `--force`. Supports `--dry-run` and `--limit N`.
+
 ## Invariants (see CLAUDE.md for the full list)
 
 1. No dispatch without verification — the rate-con generator hard-fails on

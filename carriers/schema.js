@@ -52,11 +52,15 @@ export const CARRIER = {
   nextFollowUp: 'fldrJWU7nKCnREdAo',
   notes: 'fld9VP5w9vkJg6TlF',
   activities: 'fld00mPu3Oc154dnM',
-  // Phase 2 fields — created via the Airtable connector; IDs filled in when
-  // verify-authority ships. null means "not yet provisioned".
-  authorityStatus: null,
-  authorityVerifiedDate: null,
-  oosFlag: null,
+};
+
+// Phase 2 authority fields are provisioned by `verify-carriers --provision`
+// and therefore have no stable IDs to pin here — they are resolved BY NAME at
+// runtime via the Meta API (resolveAuthorityFields in verify-authority.js).
+export const AUTHORITY_FIELD_NAMES = {
+  authorityStatus: 'Authority Status',
+  authorityVerifiedDate: 'Authority Verified Date',
+  oosFlag: 'OOS Flag',
 };
 
 export const ACTIVITY = {
